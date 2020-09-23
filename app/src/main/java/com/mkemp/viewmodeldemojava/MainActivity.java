@@ -7,11 +7,13 @@ import com.mkemp.viewmodeldemojava.databinding.ActivityMainBinding;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 public class MainActivity extends AppCompatActivity
 {
-    private int count = 0;
     private ActivityMainBinding binding;
+    private MainActivityViewModel viewModel;
     
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -19,14 +21,21 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         
-        binding.countText.setText(String.valueOf(count));
+        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        
+        viewModel.getCountLiveData().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer count)
+            {
+                binding.countText.setText(String.valueOf(count));
+            }
+        });
         
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                count++;
-                binding.countText.setText(String.valueOf(count));
+                viewModel.incrementCount();
             }
         });
     }

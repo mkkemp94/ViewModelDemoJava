@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.mkemp.viewmodeldemojava.MainActivityViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,6 +21,7 @@
             android:textSize="66sp"
             android:textStyle="bold"
             android:typeface="serif"
+            android:text="@{String.valueOf(viewModel.countLiveData)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -28,6 +35,7 @@
             android:layout_height="wrap_content"
             android:text="Click Here"
             android:textSize="30sp"
+            android:onClick="@{() -> viewModel.incrementCount()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

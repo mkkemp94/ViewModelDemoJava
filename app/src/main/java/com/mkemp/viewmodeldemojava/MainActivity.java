@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
     
-        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        MainActivityViewModelFactory factory = new MainActivityViewModelFactory(5);
+        viewModel = new ViewModelProvider(this, factory).get(MainActivityViewModel.class);
         
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setLifecycleOwner(this);

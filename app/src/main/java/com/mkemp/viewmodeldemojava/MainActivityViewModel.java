@@ -8,9 +8,9 @@ public class MainActivityViewModel extends ViewModel
 {
     private MutableLiveData<Integer> mutableCount = new MutableLiveData<>();
     
-    public MainActivityViewModel()
+    public MainActivityViewModel(int count)
     {
-        mutableCount.setValue(0);
+        mutableCount.setValue(count);
     }
     
     public LiveData<Integer> getCountLiveData()
